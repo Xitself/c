@@ -14,6 +14,79 @@ local VirtualUser = game:GetService('VirtualUser');
 VirtualUser:CaptureController();
 
 
+
+-- StarterGui.RayfieldToggle
+G2L["1"] = Instance.new("ScreenGui");
+G2L["1"]["Name"] = [[RayfieldToggle]];
+G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+
+if get_hidden_gui or gethui then
+	local hiddenUI = get_hidden_gui or gethui
+    G2L["1"]["Parent"] = hiddenUI()
+elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
+	syn.protect_gui(G2L["1"])
+    G2L["1"]["Parent"] = CoreGui
+elseif COREGUI:FindFirstChild('RobloxGui') then
+	G2L["1"]["Parent"] = CoreGui.RobloxGui
+else
+	G2L["1"]["Parent"] = CoreGui
+end
+
+-- StarterGui.RayfieldToggle.Frame
+G2L["2"] = Instance.new("Frame", G2L["1"]);
+G2L["2"]["BackgroundColor3"] = Color3.fromRGB(111, 5, 110);
+G2L["2"]["AnchorPoint"] = Vector2.new(0, 0.5);
+G2L["2"]["Size"] = UDim2.new(0, 100, 0, 50);
+G2L["2"]["Position"] = UDim2.new(0, 0, 0.25, 0);
+
+-- StarterGui.RayfieldToggle.Frame.UICorner
+G2L["3"] = Instance.new("UICorner", G2L["2"]);
+
+
+-- StarterGui.RayfieldToggle.Frame.TextButton
+G2L["4"] = Instance.new("TextButton", G2L["2"]);
+G2L["4"]["BorderSizePixel"] = 0;
+G2L["4"]["BackgroundColor3"] = Color3.fromRGB(111, 5, 110);
+G2L["4"]["TextSize"] = 30;
+G2L["4"]["FontFace"] = Font.new([[rbxasset://fonts/families/FredokaOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["4"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["4"]["Size"] = UDim2.new(0, 100, 0, 50);
+G2L["4"]["Text"] = [[Toggle]];
+
+-- StarterGui.RayfieldToggle.Frame.TextButton.UICorner
+G2L["5"] = Instance.new("UICorner", G2L["4"]);
+
+-- Define and initialize the G2L["ToggleFunction"] variable before the event connection
+G2L["ToggleFunction"] = function()
+    local success, err = pcall(function()
+        Murderer = GetMurderer()
+        Sheriff = GetSheriff()
+        roles = updatePlayerData()
+    end)
+
+    if not success then
+        warn("Error in ToggleFunction callback:", err)
+        return
+    end
+
+    if Murderer == LocalPlayer.Name then
+        nexus:Notify({Title = 'Notification', Content = 'You are the murderer!', Duration = 5})
+    elseif Sheriff == LocalPlayer.Name then
+        nexus:Notify({Title = 'Notification', Content = 'You are the sheriff!', Duration = 5})
+    else
+        nexus:Notify({Title = 'Notification', Content = 'You are neither the murderer nor the sheriff!', Duration = 5})
+    end
+end
+
+-- Connect the event after defining and initializing the G2L["ToggleFunction"] variable
+G2L["4"].MouseButton1Click:Connect(function()
+    G2L["ToggleFunction"]()
+end)
+
+return G2L["1"], require;
+
+
+
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
 local Players = game:GetService("Players")
@@ -985,76 +1058,6 @@ Window:SelectTab(1)
 
 
 
-
--- StarterGui.RayfieldToggle
-G2L["1"] = Instance.new("ScreenGui");
-G2L["1"]["Name"] = [[RayfieldToggle]];
-G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
-
-if get_hidden_gui or gethui then
-	local hiddenUI = get_hidden_gui or gethui
-    G2L["1"]["Parent"] = hiddenUI()
-elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
-	syn.protect_gui(G2L["1"])
-    G2L["1"]["Parent"] = CoreGui
-elseif COREGUI:FindFirstChild('RobloxGui') then
-	G2L["1"]["Parent"] = CoreGui.RobloxGui
-else
-	G2L["1"]["Parent"] = CoreGui
-end
-
--- StarterGui.RayfieldToggle.Frame
-G2L["2"] = Instance.new("Frame", G2L["1"]);
-G2L["2"]["BackgroundColor3"] = Color3.fromRGB(111, 5, 110);
-G2L["2"]["AnchorPoint"] = Vector2.new(0, 0.5);
-G2L["2"]["Size"] = UDim2.new(0, 100, 0, 50);
-G2L["2"]["Position"] = UDim2.new(0, 0, 0.25, 0);
-
--- StarterGui.RayfieldToggle.Frame.UICorner
-G2L["3"] = Instance.new("UICorner", G2L["2"]);
-
-
--- StarterGui.RayfieldToggle.Frame.TextButton
-G2L["4"] = Instance.new("TextButton", G2L["2"]);
-G2L["4"]["BorderSizePixel"] = 0;
-G2L["4"]["BackgroundColor3"] = Color3.fromRGB(111, 5, 110);
-G2L["4"]["TextSize"] = 30;
-G2L["4"]["FontFace"] = Font.new([[rbxasset://fonts/families/FredokaOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["4"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["4"]["Size"] = UDim2.new(0, 100, 0, 50);
-G2L["4"]["Text"] = [[Toggle]];
-
--- StarterGui.RayfieldToggle.Frame.TextButton.UICorner
-G2L["5"] = Instance.new("UICorner", G2L["4"]);
-
--- Define and initialize the G2L["ToggleFunction"] variable before the event connection
-G2L["ToggleFunction"] = function()
-    local success, err = pcall(function()
-        Murderer = GetMurderer()
-        Sheriff = GetSheriff()
-        roles = updatePlayerData()
-    end)
-
-    if not success then
-        warn("Error in ToggleFunction callback:", err)
-        return
-    end
-
-    if Murderer == LocalPlayer.Name then
-        nexus:Notify({Title = 'Notification', Content = 'You are the murderer!', Duration = 5})
-    elseif Sheriff == LocalPlayer.Name then
-        nexus:Notify({Title = 'Notification', Content = 'You are the sheriff!', Duration = 5})
-    else
-        nexus:Notify({Title = 'Notification', Content = 'You are neither the murderer nor the sheriff!', Duration = 5})
-    end
-end
-
--- Connect the event after defining and initializing the G2L["ToggleFunction"] variable
-G2L["4"].MouseButton1Click:Connect(function()
-    G2L["ToggleFunction"]()
-end)
-
-return G2L["1"], require;
 
 
 
