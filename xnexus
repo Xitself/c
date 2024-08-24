@@ -200,7 +200,7 @@ local Options = nexus.Options
 SaveManager:SetLibrary(nexus)
 
 local Window = nexus:CreateWindow({
-    Title = "XNexus", "",
+    Title = "skid", "",
     TabWidth = 150,
     Size = UDim2.fromOffset(480, 360),
     Acrylic = true,
