@@ -870,7 +870,7 @@ local Toggle = Tabs.Server:AddToggle("ReExecute", {
         Players.LocalPlayer.OnTeleport:Connect(function(State)
             if KeepNexus and (not TeleportCheck) and queueteleport then
                 TeleportCheck = true
-                queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/raditself/c/main/loadstring'))()")
+                queueteleport("loadstring(game:HttpGet('https://github.com/raditself/'))()")
             end
         end)
     end 
