@@ -200,9 +200,9 @@ local Options = xnexus.Options
 SaveManager:SetLibrary(xnexus)
 
 local Window = xnexus:CreateWindow({
-    Title = "skid", "",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
+    Title = "what", "?",
+    TabWidth = 140,
+    Size = UDim2.fromOffset(380, 260),
     Acrylic = true,
     Theme = "Dark",
 })
