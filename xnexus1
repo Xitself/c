@@ -16,66 +16,6 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local GetPlayerDataRemote = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
 
 
-
-
-
--- Create the GUI elements
-local OpenClose = Instance.new("ImageButton")
-local UICornerOC = Instance.new("UICorner")
-local Background = Instance.new("Frame") -- this is the GUI frame that will be toggled
-
--- Set up the OpenClose button
-OpenClose.Name = "OpenClose"
-OpenClose.Parent = SysBroker -- parent it to a suitable GUI element
-OpenClose.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-OpenClose.BorderColor3 = Color3.fromRGB(0, 0, 0)
-OpenClose.BorderSizePixel = 0
-OpenClose.Position = UDim2.new(0, 0, 0.5, 0)
-OpenClose.Size = UDim2.new(0, 30, 0, 30)
-OpenClose.Image = "rbxassetid://12298407748" -- use an asset ID for the open image
-OpenClose.ImageColor3 = Color3.fromRGB(0, 255, 255)
-
-UICornerOC.CornerRadius = UDim.new(1, 0)
-UICornerOC.Parent = OpenClose
-
--- Set up the Background frame
-Background.Name = "Background"
-Background.Parent = SysBroker -- parent it to a suitable GUI element
-Background.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Background.BackgroundTransparency = 0.5
-Background.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Background.BorderSizePixel = 0
-Background.Size = UDim2.new(0, 300, 0, 400) -- set the size of the GUI frame
-
--- Create a variable to track the GUI state
-local GUIOpen = false
-
--- Add a click event to the OpenClose button
-OpenClose.MouseButton1Click:Connect(function()
-    GUIOpen = not GUIOpen
-    Background.Visible = GUIOpen
-    if GUIOpen then
-        OpenClose.Image = "rbxassetid://12298407749" -- use an asset ID for the close image
-    else
-        OpenClose.Image = "rbxassetid://12298407748" -- use an asset ID for the open image
-    end
-end)
-
--- Add a keybind to toggle the GUI
-game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessedEvent)
-    if gameProcessedEvent then return end
-    if input.KeyCode == Enum.KeyCode.B then
-        GUIOpen = not GUIOpen
-        Background.Visible = GUIOpen
-        if GUIOpen then
-            OpenClose.Image = "rbxassetid://12298407749" -- use an asset ID for the close image
-        else
-            OpenClose.Image = "rbxassetid://12298407748" -- use an asset ID for the open image
-        end
-    end
-end)
-
-
 local TeleportingToMurderer, GettingGun = false, false
 local Murderer, Sheriff = nil, nil
 local infJumpConnection, Device = false, nil
