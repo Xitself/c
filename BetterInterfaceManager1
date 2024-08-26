@@ -73,7 +73,7 @@ local InterfaceManager = {} do
         Button.TextTransparency = 1
         Button.BorderSizePixel = 0
         Button.Position = UDim2.new(0, 0, 0, 0)
-        Button.Size = UDim2.new(0, 30, 0, 30) -- Increased size
+        Button.Size = UDim2.new(0, 35, 0, 35) -- Increased size
         Button.Parent = ToggleUI
         
         local ImageLabel = Instance.new("ImageLabel")
