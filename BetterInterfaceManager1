@@ -73,14 +73,14 @@ local InterfaceManager = {} do
         Button.TextTransparency = 1
         Button.BorderSizePixel = 0
         Button.Position = UDim2.new(0, 0, 0, 0)
-        Button.Size = UDim2.new(0, 50, 0, 50) -- Increased size
+        Button.Size = UDim2.new(0, 30, 0, 30) -- Increased size
         Button.Parent = ToggleUI
         
         local ImageLabel = Instance.new("ImageLabel")
         ImageLabel.Name = "ImageLabel"
         ImageLabel.BackgroundTransparency = 1
         ImageLabel.Size = UDim2.new(1, 0, 1, 0)
-        ImageLabel.Image = "rbxassetid://19001638071"
+        ImageLabel.Image = "rbxassetid://18888590958"
         ImageLabel.Parent = Button
         
         local UICorner = Instance.new("UICorner")
