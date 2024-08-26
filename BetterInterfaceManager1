@@ -86,7 +86,6 @@ local InterfaceManager = {} do
         local UICorner = Instance.new("UICorner")
         UICorner.CornerRadius = UDim.new(0.5, 0) -- Rounded rectangle shape
         UICorner.Parent = Button
-        UICorner:Clone().Parent = ImageLabel
 			
 				local dragging
 				local dragInput
