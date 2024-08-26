@@ -552,7 +552,7 @@ local KillMurderToggle = Tabs.Sheriff:AddToggle("KillMurder", {
                             if Gun and Gun.Handle.Reload.Playing then
                                 LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(-109, 138.1, -17))
                                 if Murderer then 
-                                    nexus:Notify({Title = 'Notification', Content = 'Shot missed reloading...', Duration = 5})
+                                    nexus:Notify({Title = 'Notification', Content = 'Shot missed reloading...', Duration = 1})
                                 end 
                                 repeat task.wait() until not (Gun and Gun.Handle.Reload.Playing) or not value
                             else
@@ -908,7 +908,7 @@ Tabs.Server:AddButton({
 	end
 })
 
-nexus:Notify({Title = 'Notification', Content = 'This script is currently in development and is currently in its beta phase.', Duration = 10})
+nexus:Notify({Title = 'Notification', Content = 'This script is currently in development and is currently in its beta phase.', Duration = 1})
 
 coroutine.wrap(function()
     while true do
