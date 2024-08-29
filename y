@@ -59,6 +59,39 @@ local function CreateHighlight()
     end
 end
 
+
+local function UpdateHighlights()
+    for _, v in pairs(Players:GetChildren()) do
+        pcall(function()
+            local highlight = v.Character and v.Character:FindFirstChild("Highlight")
+            if highlight then
+                if IsAlive(v, roles) then
+                    local role = roles[v.Name]
+                    if role then
+                        if role.Role == "Murderer" then
+                            highlight.FillColor = Color3.fromRGB(225, 0, 0)
+                        elseif role.Role == 'Sheriff' then
+                            highlight.FillColor = Color3.fromRGB(0, 0, 225)
+                        elseif role.Role == 'Hero' then
+                            highlight.FillColor = Color3.fromRGB(0, 0, 225)
+                        else
+                            highlight.FillColor = Color3.fromRGB(76, 215, 134)
+                        end 
+                    else 
+                        highlight.FillColor = Color3.fromRGB(76, 215, 134)
+                    end
+                else
+                    highlight.FillColor = Color3.fromRGB(255, 255, 255)
+                end
+
+                -- Update the player name and distance labels
+                nameLabel.Text = plr.Name
+                distanceLabel.Text = 'Distance: '..math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
+            end
+        end)
+    end
+end
+
 -- Create the TextLabel for the player name
 local nameLabel = Instance.new("TextLabel")
 nameLabel.Parent = BillboardGui
@@ -109,37 +142,7 @@ distanceLabel.TextYAlignment = Enum.TextYAlignment.Top
 nameLabel.Text = plr.Name
 distanceLabel.Text = 'Distance: '..math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
 
-local function UpdateHighlights()
-    for _, v in pairs(Players:GetChildren()) do
-        pcall(function()
-            local highlight = v.Character and v.Character:FindFirstChild("Highlight")
-            if highlight then
-                if IsAlive(v, roles) then
-                    local role = roles[v.Name]
-                    if role then
-                        if role.Role == "Murderer" then
-                            highlight.FillColor = Color3.fromRGB(225, 0, 0)
-                        elseif role.Role == 'Sheriff' then
-                            highlight.FillColor = Color3.fromRGB(0, 0, 225)
-                        elseif role.Role == 'Hero' then
-                            highlight.FillColor = Color3.fromRGB(0, 0, 225)
-                        else
-                            highlight.FillColor = Color3.fromRGB(76, 215, 134)
-                        end 
-                    else 
-                        highlight.FillColor = Color3.fromRGB(76, 215, 134)
-                    end
-                else
-                    highlight.FillColor = Color3.fromRGB(255, 255, 255)
-                end
 
-                -- Update the player name and distance labels
-                nameLabel.Text = plr.Name
-                distanceLabel.Text = 'Distance: '..math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
-            end
-        end)
-    end
-end
 
 local function DestroyHighlight()
     for _, player in next, Players:GetPlayers()  do
